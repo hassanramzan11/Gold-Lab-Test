@@ -29,13 +29,13 @@ def generate_receipt():
 
         # Get current date and time for the receipt
         current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
+        pdffilename=datetime.now().strftime("%Y-%m-%d___%H-%M-%S")
         # Ask user where to save the file
         receipt_filename = asksaveasfilename(
             defaultextension=".pdf",
             filetypes=[("PDF files", "*.pdf")],
             title="Save Receipt As",
-            initialfile="gold_testing_receipt 2.0.pdf"  # Default filename
+            initialfile=f"{pdffilename+" ("+customer_name}).pdf"  # Default filename
         )
 
         if not receipt_filename:  # If the user cancels the save dialog
@@ -172,9 +172,13 @@ ttk.Label(form_frame, text="Enter Mil fi Rati:").grid(row=4, column=0, padx=10, 
 entry_mil_fi_rati = ttk.Entry(form_frame, width=35, font=entry_font)
 entry_mil_fi_rati.grid(row=4, column=1, padx=10, pady=15, sticky="w")
 
+# Generate Receipt Button (Placed above the footer)
+generate_button = ttk.Button(root, text="Generate Receipt", command=generate_receipt)
+generate_button.grid(row=2, column=0, columnspan=2, padx=20, pady=(10, 20), sticky="ew")
+
 # Footer Section
 footer = ttk.Label(root, text="© 2024 Nadeem Gold Testing Lab. All Rights Reserved.", font=footer_font)
-footer.grid(row=2, column=0, columnspan=2, pady=(10, 10))
+footer.grid(row=3, column=0, columnspan=2, pady=(10, 10))
 
 # Make the columns and rows dynamically resizable
 root.grid_columnconfigure(0, weight=1)

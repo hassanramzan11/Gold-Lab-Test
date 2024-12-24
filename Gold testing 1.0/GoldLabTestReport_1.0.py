@@ -41,13 +41,13 @@ def generate_receipt():
 
         # Get current date and time for the receipt
         current_datetime = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
+        pdffilename=datetime.now().strftime("%Y-%m-%d___%H-%M-%S")
         # Ask user where to save the file
         receipt_filename = asksaveasfilename(
             defaultextension=".pdf",
             filetypes=[("PDF files", "*.pdf")],
             title="Save Receipt As",
-            initialfile="gold_testing_receipt 1.0.pdf"  # Default filename
+            initialfile=f"{pdffilename+" ("+customer_name}).pdf"  # Default filename
         )
 
         if not receipt_filename:  # If the user cancels the save dialog
